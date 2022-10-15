@@ -1,19 +1,38 @@
 import Express from 'express'
-import Database from './db/connect.js'
+import {Database,UsersCollection,VoteDb} from './db/connect.js'
 import ENV from "./core/HandleEnv.js";
-
-//Get the port from the environment variable
+import cors from 'cors'
+import Authentication from './Routes/Authentication.js'
+import User from './Routes/API/Voter.js'
+import App from "./core/Application.js";
+import Candidate from "./Routes/API/Candidate.js";
+import Voter from "./Routes/API/Voter.js";
+import Election from "./Routes/API/Election.js";
 const port= ENV.PORT
 
-//Create the express app
-const App= Express()
+
 
 Database.connect().then(() => {
-    console.log('Connected to database')
+    console.log("Connected to Database")
+}).catch((err) => {
+    console.log(err)
 })
-App.get('/', (req, res) => {
-    res.send('Lets get started')
-})
+App.use(cors({
+    origin:ENV.CLIENT_URL,
+    credentials:true,
+}))
+App.use(Express.urlencoded({extended:false}))
+App.use(Express.json())
+
+
+//Assign the routes
+// App.use('/api/voter',Voter)
+// App.use('/api/user',User)
+App.use('',User)
+App.use('/candidate',Candidate)
+App.use('/auth',Authentication)
+App.use('/vote',Voter)
+App.use('/election',Election)
 
 
 App.listen(port, () => {

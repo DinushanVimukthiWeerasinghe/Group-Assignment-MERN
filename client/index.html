@@ -5,9 +5,32 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
+    <script src="./node_modules/holderjs/holder.js"></script>
+    <script>
+      Holder.addTheme('dark', {
+        bg: '#000',
+        fg: '#aaa',
+        font: 'monospace',
+        fontweight: 'normal'
+      })
+      Holder.addTheme('white', {
+        bg: '#fff',
+        fg: '#c9c9c9',
+        font: 'monospace',
+        fontweight: 'bolder'
+      })
+      Holder.addTheme('sky', {
+        bg: '#0cf',
+        fg: '#03031c',
+        font: 'monospace',
+        fontweight: 'bolder',
+        size: 24
+      })
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
+
 </html>
