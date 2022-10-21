@@ -49,7 +49,7 @@ export function ElectionPage() {
     useEffect(() => {
         Swal.fire({
             customClass:'swal-fullscreen',
-            background: '#016657',
+            background: '#a2c5c0',
             showConfirmButton: false,
             allowOutsideClick: false,
             allowEscapeKey: false,

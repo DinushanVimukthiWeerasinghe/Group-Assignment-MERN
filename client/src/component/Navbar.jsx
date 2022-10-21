@@ -31,7 +31,7 @@ export function NavbarComponent(){
                     {/*<Nav.Link href="/vote">Vote Now</Nav.Link>*/}
                     <Nav.Link href="/election">Elections</Nav.Link>
                     <Nav.Link href="/contactus">Contact Us</Nav.Link>
-                    <Nav.Link href="/register">Register</Nav.Link>
+                    <Nav.Link hidden={IsLoggedIn()} href="/register">Register</Nav.Link>
                 </Nav>
                 <Button hidden={!IsLoggedIn()} variant="outline-danger" onClick={logout}>LogOut</Button>
             </Container>

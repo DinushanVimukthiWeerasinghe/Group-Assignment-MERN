@@ -9,6 +9,8 @@ import {ContactUsPage} from "./pages/ContactUsPage";
 import React from "react";
 import {RegisterForm} from "./component/RegisterForm.jsx";
 import {NominateToElection} from "./pages/NominateToElection.jsx";
+import {ManageElection} from "./pages/ManageElection";
+import {AddElection} from "./component/AddElection";
 
 
 
@@ -16,7 +18,6 @@ function App() {
 
   return (
       <div className="App">
-
             <Routes>
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/home" element={<HomePage />} />
@@ -25,6 +26,8 @@ function App() {
                 <Route path="/contactus" element={<ContactUsPage />} />
                 <Route path="/register" element={<RegisterForm />} />
                 <Route path="/nominate" element={<NominateToElection />} />
+                <Route path="/mngelect" element={<ManageElection />} />
+                <Route path="/addelect" element={<AddElection />} />
             </Routes>
       </div>
   )
