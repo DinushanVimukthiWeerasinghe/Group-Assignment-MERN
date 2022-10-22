@@ -21,7 +21,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<LoginPage />} />
                 <Route path="/home" element={<HomePage />} />
-                <Route path="/election" element={<ElectionPage />} />
+                <Route path="/election" element={<ElectionPage name={"Dinushan"} />} />
                 <Route path="/vote" element={<VotePage />} />
                 <Route path="/contactus" element={<ContactUsPage />} />
                 <Route path="/register" element={<RegisterForm />} />

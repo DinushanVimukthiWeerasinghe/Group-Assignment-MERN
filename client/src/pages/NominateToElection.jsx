@@ -1,5 +1,8 @@
 import {Button, Card, Col, FloatingLabel, Form, Modal, Row} from "react-bootstrap";
 import {useState} from "react";
+import {AddElection} from "../component/AddElection.jsx";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 
 export function NominateToElection(){
@@ -11,8 +14,48 @@ export function NominateToElection(){
     const handleAddElectionShow = () => setShowAddElection(true);
     const handleAddCandidateShow = () => setShowAddCandidate(true);
 
-    // const [candidateName, setCandidateName] = useState({});
-    // const [ElectionName, setElectionName] = useState({});
+    const AddNewElection = () => {
+        console.log("Adding new election");
+        console.log(ElectionName);
+
+        if(ElectionName.trim() === ""){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Election Name cannot be empty!',
+            })
+            }
+        else if (ElectionDescription.trim() === ""){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Election Description cannot be empty!',
+            })
+        }else{
+            axios.post("http://localhost:5000/election/addElection", {
+                name: ElectionName,
+                description: ElectionDescription,
+                candidates: []
+            }).then((response) => {
+                console.log(response);
+                if(response.status === 200){
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Election Added Successfully!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    handleAddElectionClose();
+                }
+            })
+        }
+
+
+    }
+
+    const [candidateName, setCandidateName] = useState("");
+    const [ElectionName, setElectionName] = useState("");
+    const [ElectionDescription, setElectionDescription] = useState("");
 
     const CandidateList=[
         {
@@ -76,7 +119,7 @@ export function NominateToElection(){
                                     controlId="floatingSelectGrid"
                                     label="Election Name"
                                 >
-                                    <Form.Control type="text" placeholder="Election Name" />
+                                    <Form.Control type="text" placeholder="Election Name" onChange={(e)=>{setElectionName(e.target.value)}} />
                                 </FloatingLabel>
                             </Row>
                             <Row className="my-2 px-2">
@@ -88,6 +131,7 @@ export function NominateToElection(){
                                         as="textarea"
                                         placeholder="Election Description"
                                         style={{ height: '100px' }}
+                                        onChange={(e)=>{setElectionDescription(e.target.value)}}
                                     />
                                 </FloatingLabel>
                             </Row>
@@ -98,7 +142,7 @@ export function NominateToElection(){
                     <Button variant="secondary" onClick={handleAddElectionClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleAddElectionClose}>
+                    <Button variant="primary" onClick={()=>{AddNewElection()}}>
                         Add Election
                     </Button>
                 </Modal.Footer>

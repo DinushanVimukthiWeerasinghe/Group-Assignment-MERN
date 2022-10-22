@@ -10,7 +10,7 @@ import {NavbarComponent} from "../component/Navbar.jsx";
 
 
 
-export function ElectionPage() {
+export function ElectionPage(props) {
     const navigate = useNavigate();
     const [Election, setElections] = useState([]);
 
